@@ -8,9 +8,13 @@ class EntryPoint
 {
     static void Main()
     {
+        string url = "http://testing.todvachev.com/selectors/id/";
         IWebDriver browser = new ChromeDriver(); // Inicialización del driver para abrir en este caso Google Chrome
-        browser.Navigate().GoToUrl("http://testing.todvachev.com/selectors/name/"); // Abrir la página
-        IWebElement element = browser.FindElement(By.Name("myName")); //Buscar el elemento por su nombre
+        browser.Navigate().GoToUrl(url); // Abrir la página
+
+        string id = "testImage";
+        IWebElement element = browser.FindElement(By.Id(id)); //Buscar el elemento por su nombre
+        
         if (element.Displayed)//Asking if the element is visible
         {
             GreenMessage("Is Visible");
@@ -19,6 +23,7 @@ class EntryPoint
         {
             RedMessage("Is not Visible");
         }
+
         Thread.Sleep(2000);
         browser.Quit();
     }
