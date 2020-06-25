@@ -7,39 +7,40 @@ using System.Threading;
 class EntryPoint
 {
     static IWebDriver browser = new ChromeDriver(); // Inicialización del driver para abrir en este caso Google Chrome
-    static IWebElement radioButton;
-    
+    static IWebElement dropDownMenu;
+    static IWebElement elementFromDDMenu;
+
     static void Main()
     {
-        string url = "http://testing.todvachev.com/special-elements/radio-button-test/";
-        string[] option = { "1","3","5" };
-        
+        string url = "http://testing.todvachev.com/special-elements/drop-down-menu-test/";
+        string dropDownMenuElements = "#post-6 > div > p:nth-child(6) > select > option:nth-child(3)";
+
         browser.Navigate().GoToUrl(url); // Abrir la página
 
-        for (int i = 0; i < option.Length; i++)
+        try
         {
-            string en1 = "#post-10 > div > form > p:nth-child(6) > input[type=\"radio\"]:nth-child(" + option[i] + ")";
+            dropDownMenu = browser.FindElement(By.Name("DropDownTest"));
+            Console.WriteLine(dropDownMenu.GetAttribute("value"));
+            elementFromDDMenu = browser.FindElement(By.CssSelector(dropDownMenuElements));
+            Console.WriteLine("The third option is: "+elementFromDDMenu.GetAttribute("value"));
+            //Thread.Sleep(3000);
 
-            try
+            elementFromDDMenu.Click();
+            Console.WriteLine(dropDownMenu.GetAttribute("value"));
+
+            for (int i=1; i<=4; i++)
             {
-                radioButton = browser.FindElement(By.CssSelector(en1));
-
-                if (radioButton.GetAttribute("checked") == "true")
-                {
-                    Console.WriteLine("The RadioButton "+(i+1)+" is checked");
-                }
-                else
-                {
-                    Console.WriteLine("The RadioButton "+(i+1)+" is NOT checked");
-                }
-
+                dropDownMenuElements = "#post-6 > div > p:nth-child(6) > select > option:nth-child("+i+")";
+                elementFromDDMenu = browser.FindElement(By.CssSelector(dropDownMenuElements));
+                Console.WriteLine("The option "+i+" is: " + elementFromDDMenu.GetAttribute("value"));
             }
-            catch (NoSuchElementException)
-            {
-                RedMessage("Can't Find the element");
-            }
-        }           
-                
+
+        }
+        catch (NoSuchElementException)
+        {
+            RedMessage("Can't Find the element");
+        }
+
         Console.WriteLine("Press any Key to continue...");
         Console.ReadLine();
         browser.Quit();
