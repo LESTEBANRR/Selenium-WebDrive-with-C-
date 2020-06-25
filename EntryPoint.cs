@@ -6,44 +6,30 @@ using System.Threading;
 
 class EntryPoint
 {
+    static IWebDriver browser = new ChromeDriver(); // Inicialización del driver para abrir en este caso Google Chrome
+    static IWebElement textBox;
     static void Main()
     {
-        string url = "http://testing.todvachev.com/selectors/css-path/";
-        string cssPath = "#post-108 > div > figure > img";
-        string xPath = "//*[@id=\"post-108\"]/div/figure/img";
-
-        IWebDriver browser = new ChromeDriver(); // Inicialización del driver para abrir en este caso Google Chrome
+        string url = "http://testing.todvachev.com/special-elements/text-input-field/";
+        
         browser.Navigate().GoToUrl(url); // Abrir la página
-
-
-        IWebElement cssPathelement;
-        IWebElement XPathelement;
-
+        string en1 = "username";
         try
         {
-            cssPathelement = browser.FindElement(By.CssSelector(cssPath));
-            if (cssPathelement.Displayed)
-            {
-                GreenMessage("Css Path Element is Visible");
-            }
+            textBox = browser.FindElement(By.Name(en1));
+            textBox.SendKeys("Test text");
+
+            Thread.Sleep(3000);
+
+            Console.WriteLine(textBox.GetAttribute("maxlength"));            
+
+            Thread.Sleep(3000);
+
         }
         catch (NoSuchElementException)
         {
-            RedMessage("Css Path Element is not Visible");
-        }
-        //------------------------------------------------------------------------
-        try
-        {
-            XPathelement = browser.FindElement(By.XPath(xPath));
-            if (XPathelement.Displayed)
-            {
-                GreenMessage("XPath Element is Visible");
-            }
-        }
-        catch (NoSuchElementException)
-        {
-            RedMessage("XPath Element is not Visible");
-        }
+            RedMessage("No se encontró el elemento"+en1);
+        }     
                 
         Console.WriteLine("Press any Key to continue...");
         Console.ReadLine();
