@@ -1,0 +1,12 @@
+C:\Users\Azul\Documents\L_E\.Net\SetupEnviroment\bin\Debug\SetupEnviroment.exe.config
+C:\Users\Azul\Documents\L_E\.Net\SetupEnviroment\bin\Debug\SetupEnviroment.exe
+C:\Users\Azul\Documents\L_E\.Net\SetupEnviroment\bin\Debug\SetupEnviroment.pdb
+C:\Users\Azul\Documents\L_E\.Net\SetupEnviroment\bin\Debug\WebDriver.dll
+C:\Users\Azul\Documents\L_E\.Net\SetupEnviroment\bin\Debug\WebDriver.Support.dll
+C:\Users\Azul\Documents\L_E\.Net\SetupEnviroment\bin\Debug\WebDriver.xml
+C:\Users\Azul\Documents\L_E\.Net\SetupEnviroment\bin\Debug\WebDriver.Support.xml
+C:\Users\Azul\Documents\L_E\.Net\SetupEnviroment\obj\Debug\SetupEnviroment.csprojAssemblyReference.cache
+C:\Users\Azul\Documents\L_E\.Net\SetupEnviroment\obj\Debug\SetupEnviroment.csproj.CoreCompileInputs.cache
+C:\Users\Azul\Documents\L_E\.Net\SetupEnviroment\obj\Debug\SetupEnviroment.csproj.CopyComplete
+C:\Users\Azul\Documents\L_E\.Net\SetupEnviroment\obj\Debug\SetupEnviroment.exe
+C:\Users\Azul\Documents\L_E\.Net\SetupEnviroment\obj\Debug\SetupEnviroment.pdb
