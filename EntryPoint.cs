@@ -16,26 +16,35 @@ class EntryPoint
         browser.Navigate().GoToUrl(url); // Abrir la página
 
 
-        IWebElement cssPathelement=browser.FindElement(By.CssSelector(cssPath));
-        IWebElement XPathelement = browser.FindElement(By.XPath(xPath));
+        IWebElement cssPathelement;
+        IWebElement XPathelement;
 
-        if (cssPathelement.Displayed)
+        try
         {
-            GreenMessage("Css Path Element is Visible");
+            cssPathelement = browser.FindElement(By.CssSelector(cssPath));
+            if (cssPathelement.Displayed)
+            {
+                GreenMessage("Css Path Element is Visible");
+            }
         }
-        else{
+        catch (NoSuchElementException)
+        {
             RedMessage("Css Path Element is not Visible");
         }
-
-        if (XPathelement.Displayed)
+        //------------------------------------------------------------------------
+        try
         {
-            GreenMessage("XPath Element is Visible");
+            XPathelement = browser.FindElement(By.XPath(xPath));
+            if (XPathelement.Displayed)
+            {
+                GreenMessage("XPath Element is Visible");
+            }
         }
-        else
+        catch (NoSuchElementException)
         {
             RedMessage("XPath Element is not Visible");
         }
-
+                
         Console.WriteLine("Press any Key to continue...");
         Console.ReadLine();
         browser.Quit();
