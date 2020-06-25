@@ -8,16 +8,33 @@ class EntryPoint
 {
     static void Main()
     {
-        string url = "http://testing.todvachev.com/selectors/class-name/";
-        string className = "testClass";
+        string url = "http://testing.todvachev.com/selectors/css-path/";
+        string cssPath = "#post-108 > div > figure > img";
+        string xPath = "//*[@id=\"post-108\"]/div/figure/img";
 
         IWebDriver browser = new ChromeDriver(); // Inicialización del driver para abrir en este caso Google Chrome
         browser.Navigate().GoToUrl(url); // Abrir la página
 
-        
-        IWebElement element = browser.FindElement(By.ClassName(className)); //Buscar el elemento por su nombre
 
-        Console.WriteLine(element.Text);
+        IWebElement cssPathelement=browser.FindElement(By.CssSelector(cssPath));
+        IWebElement XPathelement = browser.FindElement(By.XPath(xPath));
+
+        if (cssPathelement.Displayed)
+        {
+            GreenMessage("Css Path Element is Visible");
+        }
+        else{
+            RedMessage("Css Path Element is not Visible");
+        }
+
+        if (XPathelement.Displayed)
+        {
+            GreenMessage("XPath Element is Visible");
+        }
+        else
+        {
+            RedMessage("XPath Element is not Visible");
+        }
 
         Console.WriteLine("Press any Key to continue...");
         Console.ReadLine();
