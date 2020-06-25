@@ -7,34 +7,18 @@ using System.Threading;
 class EntryPoint
 {
     static IWebDriver browser = new ChromeDriver(); // Inicialización del driver para abrir en este caso Google Chrome
-    static IWebElement dropDownMenu;
-    static IWebElement elementFromDDMenu;
+    static IAlert alert;
 
     static void Main()
     {
-        string url = "http://testing.todvachev.com/special-elements/drop-down-menu-test/";
-        string dropDownMenuElements = "#post-6 > div > p:nth-child(6) > select > option:nth-child(3)";
-
+        string url = "http://testing.todvachev.com/special-elements/alert-box/";1
         browser.Navigate().GoToUrl(url); // Abrir la página
 
         try
         {
-            dropDownMenu = browser.FindElement(By.Name("DropDownTest"));
-            Console.WriteLine(dropDownMenu.GetAttribute("value"));
-            elementFromDDMenu = browser.FindElement(By.CssSelector(dropDownMenuElements));
-            Console.WriteLine("The third option is: "+elementFromDDMenu.GetAttribute("value"));
-            //Thread.Sleep(3000);
-
-            elementFromDDMenu.Click();
-            Console.WriteLine(dropDownMenu.GetAttribute("value"));
-
-            for (int i=1; i<=4; i++)
-            {
-                dropDownMenuElements = "#post-6 > div > p:nth-child(6) > select > option:nth-child("+i+")";
-                elementFromDDMenu = browser.FindElement(By.CssSelector(dropDownMenuElements));
-                Console.WriteLine("The option "+i+" is: " + elementFromDDMenu.GetAttribute("value"));
-            }
-
+            alert = browser.SwitchTo().Alert();
+            Thread.Sleep(3500);
+            alert.Accept();
         }
         catch (NoSuchElementException)
         {
