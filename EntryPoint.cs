@@ -7,39 +7,38 @@ using System.Threading;
 class EntryPoint
 {
     static IWebDriver browser = new ChromeDriver(); // Inicialización del driver para abrir en este caso Google Chrome
-    static IWebElement checkBox;
+    static IWebElement radioButton;
     
     static void Main()
     {
-        string url = "http://testing.todvachev.com/special-elements/check-button-test-3/";
-        string option = "3";
+        string url = "http://testing.todvachev.com/special-elements/radio-button-test/";
+        string[] option = { "1","3","5" };
         
         browser.Navigate().GoToUrl(url); // Abrir la página
-        string en1 = "#post-33 > div > p:nth-child(8) > input[type=\"checkbox\"]:nth-child("+option+")";
 
-        try
+        for (int i = 0; i < option.Length; i++)
         {
-            checkBox = browser.FindElement(By.CssSelector(en1));
-            if (checkBox.GetAttribute("checked") == "true")
+            string en1 = "#post-10 > div > form > p:nth-child(6) > input[type=\"radio\"]:nth-child(" + option[i] + ")";
+
+            try
             {
-                GreenMessage("The box "+option+" is checked");
+                radioButton = browser.FindElement(By.CssSelector(en1));
+
+                if (radioButton.GetAttribute("checked") == "true")
+                {
+                    Console.WriteLine("The RadioButton "+(i+1)+" is checked");
+                }
+                else
+                {
+                    Console.WriteLine("The RadioButton "+(i+1)+" is NOT checked");
+                }
+
             }
-            else
+            catch (NoSuchElementException)
             {
-                RedMessage("The box is not checked");
+                RedMessage("Can't Find the element");
             }
-            Console.WriteLine(checkBox.GetAttribute("value"));
-            option = "1";
-            checkBox = browser.FindElement(By.CssSelector("#post-33 > div > p:nth-child(8) > input[type=\"checkbox\"]:nth-child(" + option + ")"));
-            Console.WriteLine(checkBox.GetAttribute("value"));
-            Thread.Sleep(3000);
-            checkBox.Click();
-            Thread.Sleep(2000);
-        }
-        catch (NoSuchElementException)
-        {
-            RedMessage("Can't Find the element");
-        }     
+        }           
                 
         Console.WriteLine("Press any Key to continue...");
         Console.ReadLine();
