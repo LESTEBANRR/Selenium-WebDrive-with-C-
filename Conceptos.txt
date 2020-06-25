@@ -1,0 +1,7 @@
+Selenium WebDrive
+
+-Create a new project in VisualStudio, the project should be console App (.Net Framework).
+-Delete the unecesary things like the imports and the namespace.
+-Is recommended (when you work in big projects) that change the main class name for some more especific like "EntryPoint".
+-Add the Selenium libraries to the project (Selenium.WebDrive, Selenium.Support and Selenium.ChromeDriver.
+
